@@ -16,7 +16,7 @@ public class LoginCtr {
 
     public void registerNewUser() {
 
-        Customer customer = new Customer();
+        //Customer customer = new Customer();
 
     }
 }
