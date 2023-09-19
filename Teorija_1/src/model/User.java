@@ -1,8 +1,15 @@
 package model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class User {
+
+@Getter
+@Setter
+public abstract class User implements Serializable {
     int i;
     String login;
     String password;
@@ -31,4 +38,13 @@ public abstract class User {
 //                ", birthDate=" + birthDate +
 //                '}'; //pasikeisti kaip noriu
 //    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

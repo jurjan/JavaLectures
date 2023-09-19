@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Warehouse {
+public class Warehouse implements Serializable {
     private int id;
     private String address;
     private List<Product> inStock;

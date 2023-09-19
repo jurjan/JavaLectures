@@ -2,7 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
-public class Customer extends User{
+public class Customer extends User {
     private String address;
     private String cardNo;
 
