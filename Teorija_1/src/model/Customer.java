@@ -1,7 +1,17 @@
 package model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer extends User {
     private String address;
     private String cardNo;
@@ -22,4 +32,6 @@ public class Customer extends User {
                 ", birthDate=" + birthDate +
                 '}';
     }
+
+
 }

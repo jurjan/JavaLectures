@@ -1,9 +1,23 @@
 package model;
 
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
-public class Manager extends User implements Serializable {
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Manager extends User {
+
+    private String employeeId;
+    private String medCertificate;
+    private LocalDate employmentDate;
+    private boolean isAdmin;
 
     public Manager(String login, String password, LocalDate birthDate) {
         super(login, password, birthDate);

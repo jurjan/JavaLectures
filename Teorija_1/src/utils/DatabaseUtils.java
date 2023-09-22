@@ -10,7 +10,7 @@ public class DatabaseUtils {
     public static Connection connectToDb() {
         Connection conn = null;
 
-        String DB_URL = "jdbc:mysql://localhost/Kursinis";
+        String DB_URL = "jdbc:mysql://localhost/Kursinis3";
         String USER = "root";
         String PASS = "";
         try {
