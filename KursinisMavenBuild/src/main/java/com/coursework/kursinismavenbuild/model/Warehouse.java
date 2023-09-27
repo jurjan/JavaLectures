@@ -1,38 +1,36 @@
-package model;
+package com.coursework.kursinismavenbuild.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity
-@Table(name = "warehouse")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@Entity
 public class Warehouse implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
-    @Column(name = "title")
     private String title;
-    @Column(name = "address")
     private String address;
-    @Transient
+    @OneToMany(mappedBy = "worksInWarehouse", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Manager> managers;
-    @Transient
-    private List<Product> inStock;
-
-    public Warehouse(String address, List<Product> inStock) {
-        this.address = address;
-        this.inStock = inStock;
-    }
+    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Plants> inStockPlants;
+    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Other> inStockOther;
 
     public Warehouse(String title, String address) {
         this.title = title;

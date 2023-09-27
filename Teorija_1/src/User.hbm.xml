@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD  3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<!--    <class name="model." table="courses">-->
+<!--        <meta attribute="class-description">Course class mapping to courses table</meta>-->
+<!--        <id name="id" type="integer" column="id">-->
+<!--            <generator class="native"/>-->
+<!--        </id>-->
+<!--        <property name="title" column="title" type="string"/>-->
+<!--        <property name="description" column="description" type="string"/>-->
+
+<!--        <set name="administrators" table="user_course"-->
+<!--             inverse="false" lazy="true" fetch="select" >-->
+<!--            <key>-->
+<!--                <column name="course_id" not-null="true" />-->
+<!--            </key>-->
+<!--            <many-to-many entity-name="com.course.coursesystem.model.Person">-->
+<!--                <column name="user_id" not-null="true" />-->
+<!--            </many-to-many>-->
+<!--        </set>-->
+
+<!--    </class>-->
+</hibernate-mapping>

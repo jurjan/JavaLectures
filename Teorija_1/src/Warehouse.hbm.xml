@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD  3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.Warehouse" table="warehouse">
+        <meta attribute="class-description">Warehouse xbm mapping</meta>
+        <id name="id" type="integer" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="title" type="string" column="title"/>
+        <property name="address" type="string" column="address"/>
+    </class>
+</hibernate-mapping>
