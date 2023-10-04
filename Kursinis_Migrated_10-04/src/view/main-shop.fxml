@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxControllers.MainShopController">
+    <children>
+        <TabPane fx:id="tabPane" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab fx:id="primaryTab" onSelectionChanged="#loadTabValues" text="Products">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <ListView fx:id="productList" layoutX="14.0" layoutY="14.0" prefHeight="347.0" prefWidth="236.0" AnchorPane.bottomAnchor="8.400000000000034" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="14.0" />
+                        <Button layoutX="281.0" layoutY="331.0" mnemonicParsing="false" onAction="#leaveComment" text="Leave a comment" AnchorPane.bottomAnchor="121.6" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="244.0" AnchorPane.topAnchor="224.0" />
+                        <Button layoutX="266.0" layoutY="224.0" mnemonicParsing="false" onAction="#addToCart" text="Add to cart" AnchorPane.bottomAnchor="121.6" AnchorPane.leftAnchor="266.0" AnchorPane.rightAnchor="258.0" AnchorPane.topAnchor="224.0" />
+                        <ListView fx:id="currentOrder" layoutX="264.0" layoutY="34.0" prefHeight="151.0" prefWidth="312.0" AnchorPane.bottomAnchor="186.0" AnchorPane.leftAnchor="264.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="34.0" />
+                        <Label layoutX="266.0" layoutY="14.0" text="Current cart:" />
+                        <Button layoutX="500.0" layoutY="224.0" mnemonicParsing="false" text="Place order" />
+                        <Label layoutX="266.0" layoutY="188.0" text="Total amount:" />
+                        <Label fx:id="totalAmountLabel" layoutX="349.0" layoutY="188.0" text="0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="usersTab" onSelectionChanged="#loadTabValues" text="Users">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="customerTable" layoutX="14.0" layoutY="14.0" prefHeight="178.0" prefWidth="578.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="managerTable" layoutX="14.0" layoutY="199.0" prefHeight="158.0" prefWidth="578.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+                    </content>
+                </Tab>
+            <Tab fx:id="warehouseTab" onSelectionChanged="#loadTabValues" text="Warehouse">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="warehouseList" layoutX="20.0" layoutY="14.0" onMouseClicked="#loadWarehouseData" prefHeight="344.0" prefWidth="210.0" />
+                        <Button layoutX="248.0" layoutY="332.0" mnemonicParsing="false" onAction="#addNewWarehouse" prefHeight="26.0" prefWidth="86.0" text="Add new" />
+                        <Button layoutX="351.0" layoutY="332.0" mnemonicParsing="false" onAction="#updateWarehouse" prefHeight="26.0" prefWidth="83.0" text="Update" />
+                        <Button layoutX="452.0" layoutY="332.0" mnemonicParsing="false" onAction="#removeWarehouse" prefHeight="26.0" prefWidth="97.0" text="Remove" />
+                        <TextField fx:id="addressWarehouseField" layoutX="260.0" layoutY="62.0" promptText="Address" />
+                        <TextField fx:id="titleWarehouseField" layoutX="260.0" layoutY="27.0" promptText="Title" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="ordersTab" onSelectionChanged="#loadTabValues" text="Orders">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab fx:id="productsTab" onSelectionChanged="#loadTabValues" text="Product">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="productListManager" layoutX="19.0" layoutY="7.0" prefHeight="138.0" prefWidth="244.0" />
+                        <TextField fx:id="productTitleField" layoutX="20.0" layoutY="145.0" prefHeight="26.0" prefWidth="242.0" promptText="Title" />
+                        <TextArea fx:id="productDescriptionField" layoutX="21.0" layoutY="172.0" prefHeight="120.0" prefWidth="240.0" promptText="Description" />
+                        <TextField fx:id="productManufacturerField" layoutX="20.0" layoutY="292.0" prefHeight="26.0" prefWidth="242.0" promptText="Manufacturer" />
+                        <ComboBox fx:id="productType" layoutX="279.0" layoutY="14.0" onAction="#enableProductFields" prefHeight="26.0" prefWidth="306.0" />
+                        <ComboBox fx:id="warehouseComboBox" layoutX="19.0" layoutY="332.0" prefHeight="26.0" prefWidth="242.0" promptText="Warehouse" />
+                        <DatePicker fx:id="plantDateField" layoutX="279.0" layoutY="48.0" prefHeight="26.0" prefWidth="307.0" promptText="Enter plant/pick date:" />
+                        <TextField fx:id="weightField" layoutX="279.0" layoutY="86.0" prefHeight="26.0" prefWidth="308.0" promptText="Enter weight:" />
+                        <TextArea fx:id="chemicalDescriptionField" layoutX="279.0" layoutY="118.0" prefHeight="152.0" prefWidth="309.0" promptText="Enter chemical composition:" />
+                        <Button layoutX="279.0" layoutY="333.0" mnemonicParsing="false" onAction="#addNewProduct" prefHeight="26.0" prefWidth="73.0" text="Add new" />
+                        <Button layoutX="369.0" layoutY="333.0" mnemonicParsing="false" onAction="#updateProduct" prefHeight="26.0" prefWidth="114.0" text="Update" />
+                        <Button layoutX="509.0" layoutY="333.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="26.0" prefWidth="58.0" text="Delete" />
+                        <TextField fx:id="productPriceField" layoutX="278.0" layoutY="280.0" prefHeight="26.0" prefWidth="306.0" promptText="Enter price:" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
