@@ -9,7 +9,8 @@ module com.kursinis.prif4kursinis {
 
     opens com.kursinis.prif4kursinis to javafx.fxml;
     exports com.kursinis.prif4kursinis;
+    opens com.kursinis.prif4kursinis.model to javafx.fxml, org.hibernate.orm.core;
+    exports com.kursinis.prif4kursinis.model;
     opens com.kursinis.prif4kursinis.fxControllers to javafx.fxml;
     exports com.kursinis.prif4kursinis.fxControllers to javafx.fxml;
-    opens com.kursinis.prif4kursinis.model to org.hibernate.orm.core;
 }

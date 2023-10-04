@@ -29,26 +29,18 @@ public class Warehouse implements Serializable {
     private List<Manager> managers;
     @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Other> inStockOther;
-    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Plant> inStockPlants;
+    private List<Product> inStockProducts;
 
 
     public Warehouse(String title, String address) {
         this.title = title;
         this.address = address;
-        this.inStockOther = new ArrayList<>();
-        this.inStockPlants = new ArrayList<>();
+        this.inStockProducts = new ArrayList<>();
         this.managers = new ArrayList<>();
     }
 
     @Override
     public String toString() {
-        return "Warehouse{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+        return title;
     }
 }

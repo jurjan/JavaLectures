@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -42,11 +43,22 @@ public class LoginController implements Initializable {
         stage.show();
     }
 
-    public void validateAndConnect() {
+    public void validateAndConnect() throws IOException {
         userHib = new UserHib(entityManagerFactory);
         User user = userHib.getUserByCredentials(loginField.getText(), passwordField.getText());
+        //Cia galim optimizuoti, kol kas paliksiu kaip pvz su userHib
         if (user != null) {
-            //atidaryt langa
+            FXMLLoader fxmlLoader = new FXMLLoader(StartGui.class.getResource("main-shop.fxml"));
+            Parent parent = fxmlLoader.load();
+            MainShopController mainShopController = fxmlLoader.getController();
+            mainShopController.setData(entityManagerFactory, user);
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) loginField.getScene().getWindow();
+            stage.setTitle("Shop");
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            JavaFxCustomUtils.generateAlert(Alert.AlertType.INFORMATION, "Login INFO", "Wrong data", "Please check credentials, no such user");
         }
     }
 
