@@ -49,12 +49,13 @@ public class GenericHib {
     }
 
     //Su delete bus niuansai, kol kas nerasau
-    public <T> void delete(T entity) {
+    public <T> void delete(Class<T> entityClass, int id) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.remove(entity);
+            var object = em.find(entityClass, id);
+            em.remove(object);
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

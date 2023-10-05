@@ -23,4 +23,15 @@ public class Comment {
     private String commentTitle;
     private String commentBody;
     private LocalDate dateCreated;
+
+    public Comment(String commentTitle, String commentBody) {
+        this.commentTitle = commentTitle;
+        this.commentBody = commentBody;
+        this.dateCreated = LocalDate.now();
+    }
+
+    @Override
+    public String toString() {
+        return commentTitle + ":" + dateCreated;
+    }
 }

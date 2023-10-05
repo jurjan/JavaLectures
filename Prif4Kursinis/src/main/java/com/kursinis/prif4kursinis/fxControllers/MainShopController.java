@@ -57,6 +57,10 @@ public class MainShopController implements Initializable {
     public TextArea chemicalDescriptionField;
     @FXML
     public TextField productManufacturerField;
+    public TextField commentTitleField;
+    public TextArea commentBodyField;
+    public ListView<Comment> commentListField;
+    public Tab commentTab;
 
     private EntityManagerFactory entityManagerFactory;
     private User currentUser;
@@ -110,6 +114,8 @@ public class MainShopController implements Initializable {
             warehouseComboBox.getItems().addAll(genericHib.getAllRecords(Warehouse.class));
         } else if (warehouseTab.isSelected()) {
             loadWarehouseList();
+        } else if (commentTab.isSelected()) {
+            loadCommentList();
         }
     }
 
@@ -178,7 +184,7 @@ public class MainShopController implements Initializable {
     public void removeWarehouse() {
         Warehouse selectedWarehouse = warehouseList.getSelectionModel().getSelectedItem();
         Warehouse warehouse = genericHib.getEntityById(Warehouse.class, selectedWarehouse.getId());
-        genericHib.delete(warehouse);
+        genericHib.delete(Warehouse.class, selectedWarehouse.getId());
         loadWarehouseList();
     }
 
@@ -188,5 +194,39 @@ public class MainShopController implements Initializable {
         addressWarehouseField.setText(selectedWarehouse.getAddress());
     }
 
+    //--------------Comment test section ------------------------//
 
+    private void loadCommentList() {
+        commentListField.getItems().clear();
+        commentListField.getItems().addAll(genericHib.getAllRecords(Comment.class));
+    }
+
+    public void createComment() {
+        Comment comment = new Comment(commentTitleField.getText(), commentBodyField.getText());
+        genericHib.create(comment);
+        loadCommentList();
+    }
+
+
+    public void updateComment() {
+        Comment selectedComment = commentListField.getSelectionModel().getSelectedItem();
+        Comment commentFromDb = genericHib.getEntityById(Comment.class, selectedComment.getId());
+        commentFromDb.setCommentTitle(commentTitleField.getText());
+        commentFromDb.setCommentBody(commentBodyField.getText());
+        genericHib.update(commentFromDb);
+        loadCommentList();
+    }
+
+    public void deleteComment() {
+        Comment selectedComment = commentListField.getSelectionModel().getSelectedItem();
+        //Comment commentFromDb = genericHib.getEntityById(Comment.class, selectedComment.getId());
+        genericHib.delete(Comment.class, selectedComment.getId());
+        loadCommentList();
+    }
+
+    public void loadCommentInfo() {
+        Comment selectedComment = commentListField.getSelectionModel().getSelectedItem();
+        commentTitleField.setText(selectedComment.getCommentTitle());
+        commentBodyField.setText(selectedComment.getCommentBody());
+    }
 }
