@@ -8,7 +8,7 @@ import java.io.IOException;
 public class StartGui extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(StartGui.class.getResource("view/registration.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartGui.class.getResource("view/login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Shop");
         stage.setScene(scene);

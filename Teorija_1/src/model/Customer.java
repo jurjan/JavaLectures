@@ -1,5 +1,6 @@
 package model;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,12 +13,13 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Customer extends User {
     private String address;
     private String cardNo;
 
-    public Customer(String login, String password, LocalDate birthDate, String address, String cardNo) {
-        super(login, password, birthDate);
+    public Customer(String login, String password, LocalDate birthDate, String name, String surname, String address, String cardNo) {
+        super(login, password, birthDate, name, surname);
         this.address = address;
         this.cardNo = cardNo;
     }
