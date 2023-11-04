@@ -1,11 +1,15 @@
 package com.kursinis.prif4kursinis.fxControllers;
 
-import com.kursinis.prif4kursinis.hibernateControllers.GenericHib;
+import com.kursinis.prif4kursinis.fxControllers.tableviewparameters.CustomerTableParameters;
+import com.kursinis.prif4kursinis.hibernateControllers.CustomHib;
 import com.kursinis.prif4kursinis.model.*;
 import jakarta.persistence.EntityManagerFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.List;
@@ -31,10 +35,6 @@ public class MainShopController implements Initializable {
     public Tab ordersTab;
     @FXML
     public Tab productsTab;
-    @FXML
-    public TableView<Customer> customerTable;
-    @FXML
-    public TableView<Manager> managerTable;
     @FXML
     public TabPane tabPane;
     @FXML
@@ -62,9 +62,28 @@ public class MainShopController implements Initializable {
     public ListView<Comment> commentListField;
     public Tab commentTab;
 
+    //------------------User Tab fields-------------------//
+    @FXML
+    public TableView customerTable;
+    @FXML
+    public TableView managerTable;
+    @FXML
+    public TableColumn<CustomerTableParameters, Integer> idTableCol;
+    @FXML
+    public TableColumn<CustomerTableParameters, String> loginTableCol;
+    @FXML
+    public TableColumn<CustomerTableParameters, String> passwordTableCol;
+    @FXML
+    public TableColumn<CustomerTableParameters, String> addressTableCol;
+    @FXML
+    public TableColumn<CustomerTableParameters, Void> dummyCol;
+
+    //Sito mums reikia, kad susidetume duomenis, kuriuos paduosime TableView
+    private ObservableList<CustomerTableParameters> data = FXCollections.observableArrayList();
+
     private EntityManagerFactory entityManagerFactory;
     private User currentUser;
-    private GenericHib genericHib;
+    private CustomHib customHib;
 
     public void setData(EntityManagerFactory entityManagerFactory, User currentUser) {
         this.entityManagerFactory = entityManagerFactory;
@@ -74,9 +93,9 @@ public class MainShopController implements Initializable {
     }
 
     private void loadData() {
-        genericHib = new GenericHib(entityManagerFactory);
+        customHib = new CustomHib(entityManagerFactory);
         productList.getItems().clear();
-        productList.getItems().addAll(genericHib.getAllRecords(Product.class));
+        productList.getItems().addAll(customHib.getAllRecords(Product.class));
 
     }
 
@@ -99,6 +118,14 @@ public class MainShopController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         productType.getItems().addAll(ProductType.values());
+
+        customerTable.setEditable(true);
+        //Sitie setCellValueFactory yra butini atvaizdavimui. Kai noriu padaryti edit, turiu perrasyt logika
+        idTableCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        loginTableCol.setCellValueFactory(new PropertyValueFactory<>("login"));
+        passwordTableCol.setCellValueFactory(new PropertyValueFactory<>("password"));
+        //kai noriu, kad butu edditable turiu atlikti siuos veiksmus:
+        addressTableCol.setCellValueFactory(new PropertyValueFactory<>("address"));
     }
 
     public void leaveComment() {
@@ -110,13 +137,32 @@ public class MainShopController implements Initializable {
     public void loadTabValues() {
         if (productsTab.isSelected()) {
             loadProductListManager();
-            List<Warehouse> record = genericHib.getAllRecords(Warehouse.class);
-            warehouseComboBox.getItems().addAll(genericHib.getAllRecords(Warehouse.class));
+            List<Warehouse> record = customHib.getAllRecords(Warehouse.class);
+            warehouseComboBox.getItems().addAll(customHib.getAllRecords(Warehouse.class));
         } else if (warehouseTab.isSelected()) {
             loadWarehouseList();
         } else if (commentTab.isSelected()) {
             loadCommentList();
+        } else if (usersTab.isSelected()) {
+            loadUserData();
         }
+    }
+
+    private void loadUserData() {
+        customerTable.getItems().clear();
+        //Kreipiuosi i database ir prasau duomenu
+        List<Customer> customerList = customHib.getAllRecords(Customer.class);
+        for (Customer c : customerList) {
+            CustomerTableParameters customerTableParameters = new CustomerTableParameters();
+            customerTableParameters.setId(c.getId());
+            customerTableParameters.setLogin(c.getLogin());
+            customerTableParameters.setPassword(c.getPassword());
+            customerTableParameters.setAddress(c.getAddress());
+            //Tureciau pasibaigti su likusiais stulpeliais
+            data.add(customerTableParameters);
+        }
+
+        customerTable.setItems(data);
     }
 
     public void enableProductFields() {
@@ -140,14 +186,14 @@ public class MainShopController implements Initializable {
 
     private void loadProductListManager() {
         productListManager.getItems().clear();
-        productListManager.getItems().addAll(genericHib.getAllRecords(Product.class));
+        productListManager.getItems().addAll(customHib.getAllRecords(Product.class));
     }
 
     public void addNewProduct() {
         if (productType.getSelectionModel().getSelectedItem() == ProductType.PLANT) {
             Warehouse selectedWarehouse = warehouseComboBox.getSelectionModel().getSelectedItem();
-            Warehouse warehouse = genericHib.getEntityById(Warehouse.class, selectedWarehouse.getId());
-            genericHib.create(new Plant(productTitleField.getText(), productDescriptionField.getText(), productManufacturerField.getText(), warehouse, plantDateField.getValue()));
+            Warehouse warehouse = customHib.getEntityById(Warehouse.class, selectedWarehouse.getId());
+            customHib.create(new Plant(productTitleField.getText(), productDescriptionField.getText(), productManufacturerField.getText(), warehouse, plantDateField.getValue()));
         }
         loadProductListManager();
     }
@@ -157,6 +203,10 @@ public class MainShopController implements Initializable {
     }
 
     public void deleteProduct() {
+
+        Product selectedProduct = productListManager.getSelectionModel().getSelectedItem();
+        customHib.deleteProduct(selectedProduct.getId());
+
         loadProductListManager();
     }
 
@@ -164,27 +214,27 @@ public class MainShopController implements Initializable {
 
     private void loadWarehouseList() {
         warehouseList.getItems().clear();
-        warehouseList.getItems().addAll(genericHib.getAllRecords(Warehouse.class));
+        warehouseList.getItems().addAll(customHib.getAllRecords(Warehouse.class));
     }
 
     public void addNewWarehouse() {
-        genericHib.create(new Warehouse(titleWarehouseField.getText(), addressWarehouseField.getText()));
+        customHib.create(new Warehouse(titleWarehouseField.getText(), addressWarehouseField.getText()));
         loadWarehouseList();
     }
 
     public void updateWarehouse() {
         Warehouse selectedWarehouse = warehouseList.getSelectionModel().getSelectedItem();
-        Warehouse warehouse = genericHib.getEntityById(Warehouse.class, selectedWarehouse.getId());
+        Warehouse warehouse = customHib.getEntityById(Warehouse.class, selectedWarehouse.getId());
         warehouse.setTitle(titleWarehouseField.getText());
         warehouse.setAddress(addressWarehouseField.getText());
-        genericHib.update(warehouse);
+        customHib.update(warehouse);
         loadWarehouseList();
     }
 
     public void removeWarehouse() {
         Warehouse selectedWarehouse = warehouseList.getSelectionModel().getSelectedItem();
-        Warehouse warehouse = genericHib.getEntityById(Warehouse.class, selectedWarehouse.getId());
-        genericHib.delete(Warehouse.class, selectedWarehouse.getId());
+        Warehouse warehouse = customHib.getEntityById(Warehouse.class, selectedWarehouse.getId());
+        customHib.delete(Warehouse.class, selectedWarehouse.getId());
         loadWarehouseList();
     }
 
@@ -198,29 +248,29 @@ public class MainShopController implements Initializable {
 
     private void loadCommentList() {
         commentListField.getItems().clear();
-        commentListField.getItems().addAll(genericHib.getAllRecords(Comment.class));
+        commentListField.getItems().addAll(customHib.getAllRecords(Comment.class));
     }
 
     public void createComment() {
         Comment comment = new Comment(commentTitleField.getText(), commentBodyField.getText());
-        genericHib.create(comment);
+        customHib.create(comment);
         loadCommentList();
     }
 
 
     public void updateComment() {
         Comment selectedComment = commentListField.getSelectionModel().getSelectedItem();
-        Comment commentFromDb = genericHib.getEntityById(Comment.class, selectedComment.getId());
+        Comment commentFromDb = customHib.getEntityById(Comment.class, selectedComment.getId());
         commentFromDb.setCommentTitle(commentTitleField.getText());
         commentFromDb.setCommentBody(commentBodyField.getText());
-        genericHib.update(commentFromDb);
+        customHib.update(commentFromDb);
         loadCommentList();
     }
 
     public void deleteComment() {
         Comment selectedComment = commentListField.getSelectionModel().getSelectedItem();
         //Comment commentFromDb = genericHib.getEntityById(Comment.class, selectedComment.getId());
-        genericHib.delete(Comment.class, selectedComment.getId());
+        customHib.delete(Comment.class, selectedComment.getId());
         loadCommentList();
     }
 

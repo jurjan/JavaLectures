@@ -16,7 +16,7 @@ public class GenericHib {
         this.entityManagerFactory = entityManagerFactory;
     }
 
-    private EntityManager getEntityManager() {
+    EntityManager getEntityManager() {
         return entityManagerFactory.createEntityManager();
     }
 

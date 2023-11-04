@@ -34,11 +34,14 @@
                      <children>
                         <TableView fx:id="customerTable" layoutX="14.0" layoutY="14.0" prefHeight="178.0" prefWidth="578.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="idTableCol" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="loginTableCol" prefWidth="75.0" text="Login" />
+                              <TableColumn fx:id="passwordTableCol" prefWidth="75.0" text="Password" />
+                              <TableColumn fx:id="addressTableCol" prefWidth="75.0" text="Address" />
+                              <TableColumn fx:id="dummyCol" prefWidth="75.0" text="Action" />
                           </columns>
                         </TableView>
-                        <TableView fx:id="managerTable" layoutX="14.0" layoutY="199.0" prefHeight="158.0" prefWidth="578.0">
+                        <TableView fx:id="managerTable" layoutX="14.0" layoutY="198.0" prefHeight="158.0" prefWidth="578.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />

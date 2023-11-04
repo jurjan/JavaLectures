@@ -13,4 +13,5 @@ module com.kursinis.prif4kursinis {
     exports com.kursinis.prif4kursinis.model;
     opens com.kursinis.prif4kursinis.fxControllers to javafx.fxml;
     exports com.kursinis.prif4kursinis.fxControllers to javafx.fxml;
+    opens com.kursinis.prif4kursinis.fxControllers.tableviewparameters to javafx.base;
 }

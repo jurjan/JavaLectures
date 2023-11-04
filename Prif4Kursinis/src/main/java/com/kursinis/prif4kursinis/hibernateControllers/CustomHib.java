@@ -1,6 +1,8 @@
 package com.kursinis.prif4kursinis.hibernateControllers;
 
+import com.kursinis.prif4kursinis.model.Product;
 import com.kursinis.prif4kursinis.model.User;
+import com.kursinis.prif4kursinis.model.Warehouse;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
@@ -31,4 +33,28 @@ public class CustomHib extends GenericHib {
             if (em != null) em.close();
         }
     }
+
+    public void deleteProduct(int id) {
+
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            var product = em.find(Product.class, id);
+            //Kai turiu objekta, galiu ji "nulinkint"
+
+            Warehouse warehouse = product.getWarehouse();
+            if (warehouse != null) {
+                warehouse.getInStockProducts().remove(product);
+                em.merge(warehouse);
+            }
+
+            em.remove(product);
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
