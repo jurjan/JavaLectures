@@ -12,6 +12,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Other extends Product {
-    private int id;
     private double weight;
 }

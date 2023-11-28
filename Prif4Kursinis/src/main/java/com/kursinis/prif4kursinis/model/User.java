@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Getter
@@ -25,6 +28,9 @@ public abstract class User implements Serializable {
     LocalDate birthDate;
     String name;
     String surname;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    List<Cart> myCarts;
 
     public User(String login, String password, LocalDate birthDate, String name, String surname) {
         this.login = login;

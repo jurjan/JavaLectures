@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kursinis.prif4kursinis.fxControllers.CommentTree">
+    <children>
+        <TreeView fx:id="commentsTree" layoutX="347.0" layoutY="15.0" prefHeight="371.0" prefWidth="219.0">
+            <contextMenu>
+                <ContextMenu>
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#deleteComment" text="Delete" />
+                        <MenuItem mnemonicParsing="false" onAction="#reply" text="Reply" />
+                    </items>
+                </ContextMenu>
+            </contextMenu>
+        </TreeView>
+        <ListView fx:id="productList" layoutX="21.0" layoutY="14.0" onMouseClicked="#loadComments" prefHeight="371.0" prefWidth="219.0" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="598.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kursinis.prif4kursinis.fxControllers.UserTabController">
+   <children>
+      <TableView fx:id="customerTable" layoutX="14.0" layoutY="14.0" prefHeight="178.0" prefWidth="578.0">
+         <columns>
+            <TableColumn fx:id="idTableCol" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="loginTableCol" prefWidth="75.0" text="Login" />
+            <TableColumn fx:id="passwordTableCol" prefWidth="75.0" text="Password" />
+            <TableColumn fx:id="addressTableCol" prefWidth="75.0" text="Address" />
+            <TableColumn fx:id="dummyCol" prefWidth="75.0" text="Action" />
+         </columns>
+      </TableView>
+      <TableView fx:id="managerTable" layoutX="14.0" layoutY="199.0" prefHeight="158.0" prefWidth="578.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="C1" />
+            <TableColumn prefWidth="75.0" text="C2" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

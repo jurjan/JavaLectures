@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="430.0" prefWidth="617.0" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.kursinis.prif4kursinis.fxControllers.CustomerTabController">
+    <ListView fx:id="productList" layoutX="14.0" layoutY="14.0" prefHeight="347.0" prefWidth="236.0"
+              AnchorPane.bottomAnchor="8.400000000000034" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="350.0"
+              AnchorPane.topAnchor="14.0"/>
+    <Button layoutX="281.0" layoutY="331.0" mnemonicParsing="false" onAction="#leaveComment" text="Leave a comment"/>
+    <Button layoutX="280.0" layoutY="224.0" mnemonicParsing="false" onAction="#addToCart" text="Add"/>
+    <ListView fx:id="currentOrder" layoutX="273.0" layoutY="14.0" prefHeight="199.0" prefWidth="329.0"/>
+    <Button layoutX="365.0" layoutY="224.0" mnemonicParsing="false" text="Remove from cart"/>
+    <Button layoutX="500.0" layoutY="224.0" mnemonicParsing="false" onAction="#createCart" text="Confirm"/>
+</AnchorPane>

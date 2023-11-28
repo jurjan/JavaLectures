@@ -7,8 +7,6 @@ public class UserTableParameters {
     SimpleIntegerProperty id = new SimpleIntegerProperty();
     SimpleStringProperty login = new SimpleStringProperty();
     SimpleStringProperty password = new SimpleStringProperty();
-    //Pabaigti likusius atributus, kurie bendri Customer ir Manager lentose/klasese
-
 
     public UserTableParameters(SimpleIntegerProperty id, SimpleStringProperty login, SimpleStringProperty password) {
         this.id = id;

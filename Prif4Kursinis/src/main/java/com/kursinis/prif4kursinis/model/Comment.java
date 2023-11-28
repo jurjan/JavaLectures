@@ -1,15 +1,15 @@
 package com.kursinis.prif4kursinis.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +23,11 @@ public class Comment {
     private String commentTitle;
     private String commentBody;
     private LocalDate dateCreated;
+    @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Comment> replies;
+    @ManyToOne
+    private Comment parentComment;
 
     public Comment(String commentTitle, String commentBody) {
         this.commentTitle = commentTitle;
