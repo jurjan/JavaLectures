@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="403.0" prefWidth="275.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kursinis.prif4kursinis.fxControllers.CommentForm">
+   <children>
+      <Button layoutX="119.0" layoutY="342.0" mnemonicParsing="false" onAction="#saveData" text="Save" />
+      <TextField fx:id="commentTitleField" layoutX="39.0" layoutY="67.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextArea fx:id="commentBodyField" layoutX="39.0" layoutY="116.0" prefHeight="200.0" prefWidth="200.0" />
+      <Slider fx:id="ratingField" layoutX="39.0" layoutY="28.0" prefHeight="10.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

@@ -37,10 +37,6 @@
           <element id="library" level="project" name="Maven: org.glassfish.jaxb:jaxb-core:3.0.0" />
           <element id="library" level="project" name="Maven: org.glassfish.jaxb:txw2:3.0.0" />
           <element id="library" level="project" name="Maven: com.sun.istack:istack-commons-runtime:4.0.0" />
-          <element id="library" level="project" name="Spring-5.2.3.RELEASE" />
-          <element id="library" level="project" name="Spring MVC-5.2.3.RELEASE" />
-          <element id="library" level="project" name="Spring Web Services-2.0.2" />
-          <element id="library" level="project" name="Spring Security-5.2.1" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:6.0.11" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:6.0.11" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:6.0.11" />

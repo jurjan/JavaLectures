@@ -106,7 +106,7 @@ public class CustomHib extends GenericHib {
             if (comment.getClass() == Review.class) {
                 Review review = (Review) comment;
                 Product product = em.find(Product.class, review.getProduct().getId());
-                product.getReviews().clear();
+                product.getReviews().remove(review);
                 em.merge(product);
             } else {
                 comment.getReplies().clear();

@@ -13,8 +13,18 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Review extends Comment {
-    private int rating;
+    private double rating;
     @ManyToOne
     private Product product;
 
+    public Review(String commentTitle, String commentBody, double rating, Product product) {
+        super(commentTitle, commentBody);
+        this.rating = rating;
+        this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return "("+ rating +")" + getCommentBody();
+    }
 }

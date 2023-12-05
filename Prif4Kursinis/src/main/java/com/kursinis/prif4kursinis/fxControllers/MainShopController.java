@@ -1,7 +1,5 @@
 package com.kursinis.prif4kursinis.fxControllers;
 
-import com.kursinis.prif4kursinis.StartGui;
-import com.kursinis.prif4kursinis.fxControllers.tableviewparameters.CustomerTableParameters;
 import com.kursinis.prif4kursinis.hibernateControllers.CustomHib;
 import com.kursinis.prif4kursinis.model.*;
 import jakarta.persistence.EntityManagerFactory;

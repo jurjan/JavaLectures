@@ -10,8 +10,5 @@
         <module name="Prif4Kursinis" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Prif4Kursinis" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
